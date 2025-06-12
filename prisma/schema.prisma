@@ -11,7 +11,7 @@ datasource db {
 model Product {
   id              Int @id @default(autoincrement())
   name            String
-  image           String? @default("default.jpg")
+  image           String @default("default.jpg")
   price           Decimal @db.Money
   ingredients     String?
   orderProduct    OrderProducts[]
