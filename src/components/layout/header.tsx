@@ -1,7 +1,6 @@
-"use client";
-
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { CartButton } from "../cart/cart-button";
 
 export const Header = () => {
   return (
@@ -12,7 +11,7 @@ export const Header = () => {
 
         <div className="flex gap-4">
             <Button className="cursor-pointer">Login / Cadastro</Button>
-            <Button className="cursor-pointer">Carrinho</Button>
+            <CartButton />
         </div>
      
     </header>

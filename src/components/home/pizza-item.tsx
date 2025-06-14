@@ -3,12 +3,21 @@ import { Product } from '@/generated/prisma';
 import Image from 'next/image';
 import { Button } from '../ui/button';
 import {decimalToMoney} from '@/lib/utils';
+import { useCart } from '@/stores/cart';
 
 type Props = {
     data: Product;
 }
 
 export const PizzaItem = ({data}: Props) => {
+
+  const cart = useCart();
+
+  const handleAddCart = () => {
+    cart.addItem({productId: data.id, quantity: 1})
+    cart.setOpen(true)
+  }
+
   return (
     <div className='text-sm bg-secondary p-4 rounded-b-md'>
        <Image
@@ -24,7 +33,7 @@ export const PizzaItem = ({data}: Props) => {
         <p className='font-bold text-sm'>{decimalToMoney(data.price)}</p>
       </div>
       <div className='text-center'>
-        <Button>Adicionar ao Carrinho</Button>
+        <Button onClick={handleAddCart}>Adicionar ao Carrinho</Button>
       </div>
     </div>
   )
