@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
     const {email, password} = await request.json();
     if(!email || !password) {
-        return NextResponse.json({error: 'Campos incomcompletos'});
+        return NextResponse.json({error: 'Campos incompletos'});
     }
 
     const user = await validateAuth(email, password);

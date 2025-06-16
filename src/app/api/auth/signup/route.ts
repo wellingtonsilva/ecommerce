@@ -5,7 +5,7 @@ export async function POST(request: Request) {
     const {name, email, password} = await request.json();
 
     if(!name || !email || !password) {
-        return NextResponse.json({error: 'Campos incomcompletos'});
+        return NextResponse.json({error: 'Campos incompletos'});
     }
 
     const has = await hasEmail(email);
