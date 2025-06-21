@@ -5,9 +5,10 @@ import { useCart } from '@/stores/cart';
 import { useProducts } from '@/stores/products';
 import { decimalToMoney } from '@/lib/utils';
 import { CartProduct } from './cart-product';
+import { useAuth } from '@/stores/auth';
 
 export const CartList = () => {
-
+const auth = useAuth();
   const cart = useCart();
   const products = useProducts();
   const [subtotal, setSubtotal] = React.useState(0);
@@ -35,7 +36,10 @@ export const CartList = () => {
         <div>Frete: {decimalToMoney(frete)}</div>
         <div className='font-bold'>Total: {decimalToMoney(subtotal + frete)} </div>
       </div>
-      <Button>Finalizar Compra</Button>
+
+      {auth.token && <Button>Finalizar Compra</Button>}
+      {!auth.token && <Button onClick={() => auth.setOpen(true)}>Login / Cadastro</Button>}
+
     </>
   )
 }

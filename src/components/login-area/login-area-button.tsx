@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button'
-import { Link } from 'lucide-react';
+import  Link  from 'next/link';
 import { useAuth } from '@/stores/auth';
 
 type Props = {

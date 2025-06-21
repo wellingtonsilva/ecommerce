@@ -1,11 +1,13 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dialog, DialogHeader, DialogContent, DialogTitle } from '../ui/dialog'
 import { useAuth } from '@/stores/auth'
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '../ui/button';
 import { LoginAreaStepEmail } from './login-area-step-email';
 import { LoginAreaSignup } from './login-area-signup';
+import { getCookie } from 'cookies-next/client';
+import { LoginAreaSignin } from './login-area-step-signin';
 
 type Steps = "EMAIL" | "SIGNUP" | "SIGNIN";
 
@@ -14,8 +16,12 @@ export const LoginAreaDialog  = () => {
   const auth = useAuth();
 
   const [step, setStep] = useState<Steps>("EMAIL");
-
   const [emailField, setEmailField] = useState('');
+
+  useEffect(() => {
+    const token = getCookie('token');
+    if (token) auth.setToken(token);
+  }, [])
 
   const handleStepEmail = (hasEmail: boolean, email: string) => {
     setEmailField(email);
@@ -69,7 +75,7 @@ export const LoginAreaDialog  = () => {
 
                 {step === "SIGNIN" && (
                     <>
-                        <Button onClick={() => setStep("EMAIL")}>Voltar</Button>
+                        <LoginAreaSignin email={emailField} />
                     </>
                 )}
             </div>
